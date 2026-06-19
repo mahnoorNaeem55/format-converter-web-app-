@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Format Converter Web App</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="converter" aria-labelledby="app-title">
+        <div class="header">
+          <p class="eyebrow">Text Utility</p>
+          <h1 id="app-title">Format Converter</h1>
+          <p class="intro">Convert text to uppercase, lowercase, or title case in one click.</p>
+        </div>
+
+        <div class="field-group">
+          <label for="text-input">Input Text</label>
+          <textarea
+            id="text-input"
+            rows="7"
+            placeholder="Type or paste your text here..."
+          ></textarea>
+        </div>
+
+        <div class="button-grid" aria-label="Text conversion actions">
+          <button type="button" id="uppercase-btn">Uppercase</button>
+          <button type="button" id="lowercase-btn">Lowercase</button>
+          <button type="button" id="titlecase-btn">Title Case</button>
+          <button type="button" id="clear-btn" class="secondary">Clear</button>
+        </div>
+
+        <div class="field-group">
+          <div class="output-label-row">
+            <label for="text-output">Output Text</label>
+            <button type="button" id="copy-btn" class="copy-button">Copy</button>
+          </div>
+          <textarea
+            id="text-output"
+            rows="7"
+            placeholder="Converted text will appear here..."
+            readonly
+          ></textarea>
+          <p id="message" class="message" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
