@@ -8,43 +8,78 @@
   </head>
   <body>
     <main class="app">
-      <section class="converter" aria-labelledby="app-title">
+      <div class="app-shell">
         <div class="header">
           <p class="eyebrow">Text Utility</p>
           <h1 id="app-title">Format Converter</h1>
-          <p class="intro">Convert text to uppercase, lowercase, or title case in one click.</p>
+          <p class="intro">Convert typed text or upload a text file for a quick uppercase download.</p>
         </div>
 
-        <div class="field-group">
-          <label for="text-input">Input Text</label>
-          <textarea
-            id="text-input"
-            rows="7"
-            placeholder="Type or paste your text here..."
-          ></textarea>
-        </div>
-
-        <div class="button-grid" aria-label="Text conversion actions">
-          <button type="button" id="uppercase-btn">Uppercase</button>
-          <button type="button" id="lowercase-btn">Lowercase</button>
-          <button type="button" id="titlecase-btn">Title Case</button>
-          <button type="button" id="clear-btn" class="secondary">Clear</button>
-        </div>
-
-        <div class="field-group">
-          <div class="output-label-row">
-            <label for="text-output">Output Text</label>
-            <button type="button" id="copy-btn" class="copy-button">Copy</button>
+        <section class="card" aria-labelledby="text-converter-title">
+          <div class="section-heading">
+            <h2 id="text-converter-title">Text Converter</h2>
+            <p>Type or paste text, then choose the format you need.</p>
           </div>
-          <textarea
-            id="text-output"
-            rows="7"
-            placeholder="Converted text will appear here..."
-            readonly
-          ></textarea>
-          <p id="message" class="message" aria-live="polite"></p>
-        </div>
-      </section>
+
+          <div class="field-group">
+            <label for="text-input">Input Text</label>
+            <textarea
+              id="text-input"
+              rows="7"
+              placeholder="Type or paste your text here..."
+            ></textarea>
+          </div>
+
+          <div class="button-grid" aria-label="Text conversion actions">
+            <button type="button" id="uppercase-btn">Uppercase</button>
+            <button type="button" id="lowercase-btn">Lowercase</button>
+            <button type="button" id="titlecase-btn">Title Case</button>
+            <button type="button" id="clear-btn" class="secondary">Clear</button>
+          </div>
+
+          <div class="field-group">
+            <div class="output-label-row">
+              <label for="text-output">Output Text</label>
+              <button type="button" id="copy-btn" class="copy-button">Copy</button>
+            </div>
+            <textarea
+              id="text-output"
+              rows="7"
+              placeholder="Converted text will appear here..."
+              readonly
+            ></textarea>
+            <p id="message" class="message" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="file-converter-title">
+          <div class="section-heading">
+            <h2 id="file-converter-title">File Converter</h2>
+            <p>Upload a .txt file, convert its contents to uppercase, and download the result.</p>
+          </div>
+
+          <div class="file-upload-box">
+            <label for="file-input">Choose Text File</label>
+            <input type="file" id="file-input" accept=".txt,text/plain" />
+            <p id="selected-file-name" class="file-name">No file selected.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="file-format">Choose Format</label>
+            <select id="file-format">
+              <option value="uppercase">Uppercase</option>
+              <option value="lowercase">Lowercase</option>
+              <option value="titlecase">Title Case</option>
+            </select>
+          </div>
+
+          <button type="button" id="convert-file-btn" class="wide-button" disabled>
+            Convert File
+          </button>
+
+          <p id="file-message" class="message" aria-live="polite"></p>
+        </section>
+      </div>
     </main>
 
     <script src="js/script.js"></script>
