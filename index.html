@@ -12,7 +12,7 @@
         <div class="header">
           <p class="eyebrow">Text Utility</p>
           <h1 id="app-title">Format Converter</h1>
-          <p class="intro">Convert typed text or upload a text file for a quick uppercase download.</p>
+          <p class="intro">Convert typed text or upload a text file for a quick formatted download.</p>
         </div>
 
         <section class="card" aria-labelledby="text-converter-title">
@@ -55,11 +55,12 @@
         <section class="card" aria-labelledby="file-converter-title">
           <div class="section-heading">
             <h2 id="file-converter-title">File Converter</h2>
-            <p>Upload a .txt file, convert its contents to uppercase, and download the result.</p>
+            <p>Upload a .txt file, choose a format, and download the result.</p>
           </div>
 
-          <div class="file-upload-box">
+          <div class="file-upload-box" id="file-drop-zone">
             <label for="file-input">Choose Text File</label>
+            <p class="drop-zone-text">Drag and drop a .txt file here, or browse from your computer.</p>
             <input type="file" id="file-input" accept=".txt,text/plain" />
             <p id="selected-file-name" class="file-name">No file selected.</p>
           </div>

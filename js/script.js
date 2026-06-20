@@ -8,6 +8,7 @@ const titlecaseButton = document.getElementById("titlecase-btn");
 const clearButton = document.getElementById("clear-btn");
 const copyButton = document.getElementById("copy-btn");
 
+const fileDropZone = document.getElementById("file-drop-zone");
 const fileInput = document.getElementById("file-input");
 const fileFormat = document.getElementById("file-format");
 const selectedFileName = document.getElementById("selected-file-name");
@@ -129,10 +130,8 @@ function convertSelectedFile() {
     });
 }
 
-// Updates the visible file name when the user picks a file.
-function handleFileSelection() {
-  const file = fileInput.files[0];
-
+// Stores a chosen file and updates the upload area state.
+function setSelectedFile(file) {
   if (!file) {
     selectedTextFile = null;
     selectedFileName.textContent = "No file selected.";
@@ -152,6 +151,35 @@ function handleFileSelection() {
   selectedFileName.textContent = file.name;
   convertFileButton.disabled = false;
   showMessage(fileMessage, "File ready to convert.");
+}
+
+// Updates the visible file name when the user picks a file.
+function handleFileSelection() {
+  setSelectedFile(fileInput.files[0]);
+}
+
+// Stops the browser from opening the file while it is being dragged.
+function preventDefaultDragBehavior(event) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+// Adds the highlighted drop-zone style.
+function showDragFeedback(event) {
+  preventDefaultDragBehavior(event);
+  fileDropZone.classList.add("drag-over");
+}
+
+// Removes the highlighted drop-zone style.
+function hideDragFeedback(event) {
+  preventDefaultDragBehavior(event);
+  fileDropZone.classList.remove("drag-over");
+}
+
+// Handles a dropped file exactly like a file chosen from the file input.
+function handleFileDrop(event) {
+  hideDragFeedback(event);
+  setSelectedFile(event.dataTransfer.files[0]);
 }
 
 // Connects all text converter buttons to their actions.
@@ -185,6 +213,10 @@ function setupTextConverter() {
 // Connects the file input and convert button to the file converter.
 function setupFileConverter() {
   fileInput.addEventListener("change", handleFileSelection);
+  fileDropZone.addEventListener("dragenter", showDragFeedback);
+  fileDropZone.addEventListener("dragover", showDragFeedback);
+  fileDropZone.addEventListener("dragleave", hideDragFeedback);
+  fileDropZone.addEventListener("drop", handleFileDrop);
   convertFileButton.addEventListener("click", convertSelectedFile);
 }
 

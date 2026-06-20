@@ -188,6 +188,19 @@ button:disabled {
   border-radius: 8px;
   padding: 22px;
   background: #fbfdff;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-upload-box.drag-over {
+  border-color: #0f766e;
+  background: #f0fdfa;
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.13);
+}
+
+.drop-zone-text {
+  margin: 0 0 14px;
+  color: #64748b;
+  line-height: 1.5;
 }
 
 input[type="file"] {
