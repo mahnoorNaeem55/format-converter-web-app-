@@ -7,6 +7,7 @@ const lowercaseButton = document.getElementById("lowercase-btn");
 const titlecaseButton = document.getElementById("titlecase-btn");
 const clearButton = document.getElementById("clear-btn");
 const copyButton = document.getElementById("copy-btn");
+const themeToggle = document.getElementById("theme-toggle");
 
 const fileDropZone = document.getElementById("file-drop-zone");
 const fileInput = document.getElementById("file-input");
@@ -16,6 +17,45 @@ const convertFileButton = document.getElementById("convert-file-btn");
 const fileMessage = document.getElementById("file-message");
 
 let selectedTextFile = null;
+
+// Applies the selected theme to the page and updates the toggle button.
+function applyTheme(theme) {
+  const isDarkMode = theme === "dark";
+
+  document.body.classList.toggle("dark-mode", isDarkMode);
+  themeToggle.setAttribute("aria-pressed", String(isDarkMode));
+  themeToggle.setAttribute(
+    "aria-label",
+    isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+  );
+}
+
+// Saves the user's theme choice so it stays the same next time.
+function saveThemePreference(theme) {
+  try {
+    localStorage.setItem("formatConverterTheme", theme);
+  } catch (error) {
+    console.warn("Theme preference could not be saved.", error);
+  }
+}
+
+// Loads the saved theme, falling back to light mode.
+function loadThemePreference() {
+  try {
+    return localStorage.getItem("formatConverterTheme") || "light";
+  } catch (error) {
+    console.warn("Theme preference could not be loaded.", error);
+    return "light";
+  }
+}
+
+// Switches between light and dark mode.
+function toggleTheme() {
+  const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+
+  applyTheme(nextTheme);
+  saveThemePreference(nextTheme);
+}
 
 // Shows a short status message, then clears it after a moment.
 function showMessage(element, text) {
@@ -220,5 +260,12 @@ function setupFileConverter() {
   convertFileButton.addEventListener("click", convertSelectedFile);
 }
 
+// Connects the dark mode button and restores the user's saved theme.
+function setupThemeToggle() {
+  applyTheme(loadThemePreference());
+  themeToggle.addEventListener("click", toggleTheme);
+}
+
+setupThemeToggle();
 setupTextConverter();
 setupFileConverter();
